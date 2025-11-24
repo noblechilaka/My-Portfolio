@@ -1,0 +1,44 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Loading" role="img">
+  <circle cx="32" cy="34" r="6" fill="white" fill-opacity="0.9" rx="4" ry="4" style="transform-origin: center bottom; transform-box: fill-box;">
+    <animate 
+      attributeName="r" 
+      values="4;16;4" 
+      keyTimes="0;0.3;0.7;1" 
+      dur="1.125s" 
+      repeatCount="indefinite" 
+      calcMode="spline" 
+      keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <animate 
+      attributeName="fill-opacity" 
+      values="0.9;0;0.9" 
+      keyTimes="0;0.3;0.7;1" 
+      dur="1.125s" 
+      repeatCount="indefinite" 
+      calcMode="spline" 
+      keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+  </circle>
+  <circle 
+    cx="32" cy="34" r="16" 
+    fill="none" 
+    stroke="white" 
+    stroke-opacity="0.75" 
+    stroke-width="1.8"
+    style="filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.12)); transform-origin: center bottom; transform-box: fill-box;">
+    <animate 
+      attributeName="stroke-opacity" 
+      values="0;0.75;0" 
+      keyTimes="0;0.3;0.7;1" 
+      dur="1.125s" 
+      repeatCount="indefinite" 
+      calcMode="spline" 
+      keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <animate 
+      attributeName="r" 
+      values="16;16;4" 
+      keyTimes="0;0.3;0.7;1" 
+      dur="1.125s" 
+      repeatCount="indefinite" 
+      calcMode="spline" 
+      keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+  </circle>
+</svg>
