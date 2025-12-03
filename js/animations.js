@@ -58,6 +58,17 @@ function animateHeroSection() {
       },
       "-=0.3"
     )
+    // Animate contact button
+    .to(
+      ".hero__contact-btn",
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      },
+      "-=0.3"
+    )
     // Animate profile image
     .to(
       ".hero__photo",
@@ -127,6 +138,16 @@ function animateAboutSection() {
       {
         opacity: 1,
         x: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      },
+      "-=0.4"
+    )
+    .to(
+      ".about__contact-btn",
+      {
+        opacity: 1,
+        y: 0,
         duration: 0.8,
         ease: "power3.out",
       },

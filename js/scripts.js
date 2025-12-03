@@ -275,23 +275,7 @@ window.addEventListener("load", () => {
 });
 
 function initializeNavigation() {
-  // Smooth scroll for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        gsap.to(window, {
-          duration: 1,
-          scrollTo: {
-            y: target,
-            offsetY: 80,
-          },
-          ease: "power3.inOut",
-        });
-      }
-    });
-  });
+  // Smooth scroll for navigation links is handled at the end of the file
 
   // Navigation menu animation
   const menuLines = document.querySelectorAll(".nav__menu-line");
@@ -447,22 +431,7 @@ mobileMenuLinks.forEach((link) => {
   });
 });
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      const headerHeight = document.querySelector(".header").offsetHeight;
-      const targetPosition = target.offsetTop - headerHeight;
-
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth",
-      });
-    }
-  });
-});
+// Smooth scrolling is handled by animations.js
 
 // Project Modal Functionality
 document.addEventListener("DOMContentLoaded", () => {
