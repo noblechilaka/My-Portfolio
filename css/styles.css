@@ -85,9 +85,6 @@ button {
   font-family: inherit;
 }
 
-
-
-
 /* Navigation */
 .nav {
   position: fixed;
@@ -110,7 +107,7 @@ button {
 }
 
 .nav__logo {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-2xl);
   font-family: var(--font-heading);
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -191,49 +188,45 @@ button {
 .menu {
   --s: 20px; /* control the size */
   --c: white; /* the color */
-  
+
   height: var(--s);
   aspect-ratio: 1;
   border: none;
   padding: 0;
-  border-inline: calc(var(--s)/2) solid #0000; 
+  border-inline: calc(var(--s) / 2) solid #0000;
   box-sizing: content-box;
-  --_g1: linear-gradient(var(--c) 20%,#0000 0 80%,var(--c) 0) 
-         no-repeat content-box border-box;
-  --_g2: radial-gradient(circle closest-side at 50% 12.5%,var(--c) 95%,#0000) 
-         repeat-y content-box border-box;
-  background: 
-    var(--_g2) left  var(--_p,0px) top,
-    var(--_g1) left  calc(var(--s)/10 + var(--_p,0px)) top,
-    var(--_g2) right var(--_p,0px) top,
-    var(--_g1) right calc(var(--s)/10 + var(--_p,0px)) top;
-  background-size: 
-    20% 80%,
-    40% 100%;
+  --_g1: linear-gradient(var(--c) 20%, #0000 0 80%, var(--c) 0) no-repeat
+    content-box border-box;
+  --_g2: radial-gradient(circle closest-side at 50% 12.5%, var(--c) 95%, #0000)
+    repeat-y content-box border-box;
+  background: var(--_g2) left var(--_p, 0px) top,
+    var(--_g1) left calc(var(--s) / 10 + var(--_p, 0px)) top,
+    var(--_g2) right var(--_p, 0px) top,
+    var(--_g1) right calc(var(--s) / 10 + var(--_p, 0px)) top;
+  background-size: 20% 80%, 40% 100%;
   position: relative;
   clip-path: inset(0 25%);
-  -webkit-mask: linear-gradient(90deg,#0000,#000 25% 75%,#0000);
+  -webkit-mask: linear-gradient(90deg, #0000, #000 25% 75%, #0000);
   cursor: pointer;
-  transition: 
-    background-position .3s var(--_s,.3s), 
-    clip-path 0s var(--_s,.6s);
-  -webkit-appearance:none;
-  -moz-appearance:none;
-  appearance:none;
+  transition: background-position 0.3s var(--_s, 0.3s),
+    clip-path 0s var(--_s, 0.6s);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 .menu:before,
 .menu:after {
-  content:"";
+  content: "";
   position: absolute;
   border-radius: var(--s);
   inset: 40% 0;
   background: var(--c);
-  transition: transform .3s calc(.3s - var(--_s,.3s));
+  transition: transform 0.3s calc(0.3s - var(--_s, 0.3s));
 }
 
 .menu:checked {
   clip-path: inset(0);
-  --_p: calc(-1*var(--s));
+  --_p: calc(-1 * var(--s));
   --_s: 0s;
 }
 .menu:checked:before {
@@ -370,7 +363,6 @@ button {
 
 .hero__image {
   position: relative;
-
   transform: translateX(30px);
 }
 
@@ -807,6 +799,11 @@ button {
     flex-direction: column;
     gap: var(--spacing-lg);
   }
+  .hero__photo{
+    border-radius: 20px;
+  }
+
+  
 }
 
 .preloader {
@@ -864,6 +861,8 @@ button {
   opacity: 0;
   pointer-events: none;
 }
+
+
 
 /* Modal Styles */
 .modal {
@@ -943,6 +942,7 @@ button {
   border-radius: 50px;
   text-align: center;
   cursor: pointer;
+  pointer-events: auto;
   transition: all var(--transition);
   text-decoration: none;
   white-space: nowrap;
@@ -952,5 +952,3 @@ button {
   background-color: var(--color-accent);
   color: var(--color-bg);
 }
-
-

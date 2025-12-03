@@ -477,9 +477,16 @@ document.addEventListener("DOMContentLoaded", () => {
     modalImage.src = imageSrc;
     modalImage.alt = altText || "Project Image";
     modalLink.href = linkHref;
+    console.log("Modal link href set to:", linkHref);
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
   }
+
+  modalLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("Modal link clicked, href:", modalLink.href);
+    window.open(modalLink.href, "_blank");
+  });
 
   // Function to close modal
   function closeModal() {
