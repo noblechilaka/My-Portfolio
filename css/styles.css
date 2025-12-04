@@ -384,6 +384,7 @@ button {
 .hero_contact_button:hover {
   background-color: var(--color-accent);
   color: var(--color-bg);
+  letter-spacing: 3px;
   transform: translateY(-2px);
 }
 
@@ -443,6 +444,13 @@ button {
   margin-left: 120px;
 }
 
+.about__text {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-2xl);
+}
+
 .about__description {
   font-size: var(--font-size-lg);
   line-height: 1.8;
@@ -497,6 +505,31 @@ button {
 .tool:hover {
   border-color: var(--color-text-secondary);
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.about_contact_button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  margin-top: var(--spacing-5xl);
+  background-color: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  border-radius: 50px;
+  transition: all var(--transition);
+  margin-bottom: var(--spacing-3xl);
+  opacity: 1;
+  transform: translateY(20px);
+}
+
+.about_contact_button:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  letter-spacing: 3px;
+  transform: translateY(-2px);
 }
 
 /* Projects Section */
@@ -675,14 +708,38 @@ button {
 }
 
 .contact__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
   font-size: var(--font-size-base);
   color: var(--color-text-secondary);
+  text-decoration: none;
   transition: all var(--transition);
 }
 
 .contact__link:hover {
-  color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
 }
+
+.contact__link--whatsapp {
+  background-color: rgba(37, 211, 102, 0.1);
+  border-color: rgba(37, 211, 102, 0.3);
+}
+
+.contact__link--whatsapp:hover {
+  background-color: #25d366;
+  border-color: #25d366;
+}
+
+
 
 /* Footer */
 .footer {
@@ -798,6 +855,12 @@ button {
     height: 300px;
   }
 
+  .about__text {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
   .about__tools {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
@@ -824,9 +887,9 @@ button {
   .contact__links {
     flex-direction: column;
     gap: var(--spacing-lg);
+    align-items: center;
   }
 
- 
   .hero__photo {
     margin-top: 9em;
     border-radius: 20px;
@@ -839,6 +902,9 @@ button {
     );
   }
 
+  .about_contact_button {
+    margin-top: var(--spacing-xs);
+  }
 }
 
 .preloader {
