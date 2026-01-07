@@ -247,6 +247,13 @@ function animateContactSection() {
     );
 }
 
+// Wait for the full page (including images, CSS, scripts) to load
+window.addEventListener("load", function() {
+  const preloader = document.getElementById("preloader");
+  preloader.classList.add("hide");
+});
+
+
 //PRELOADER
 // PRELOADER HANDLING
 // window.addEventListener("load", () => {
