@@ -111,6 +111,7 @@ button {
   font-family: var(--font-heading);
   font-weight: 600;
   letter-spacing: 0.1em;
+  pointer-events: none;
 }
 
 .nav__right {
@@ -925,6 +926,7 @@ button {
   letter-spacing: -1px;
   display: flex;
   align-items: center;
+
 }
 
 .dot {
