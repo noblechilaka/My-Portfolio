@@ -67,14 +67,20 @@ const projectData = {
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Initialize Lenis smooth scroll
+// Check if device supports touch for mobile optimizations
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
 const lenis = new Lenis({
-  duration: 1.2,
+  duration: isTouchDevice ? 0.8 : 1.2, // Faster on mobile for better responsiveness
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   orientation: "vertical",
   gestureOrientation: "vertical",
   smoothWheel: true,
   wheelMultiplier: 1,
-  touchMultiplier: 2,
+  touchMultiplier: isTouchDevice ? 3 : 2, // More sensitive on touch devices
+  lerp: isTouchDevice ? 0.08 : 0.1, // Lower lerp on mobile for smoother feel
+  smoothTouch: isTouchDevice, // Enable smooth touch on mobile
+  maxDuration: isTouchDevice ? 1.5 : 2,
 });
 
 // Integrate Lenis with GSAP ScrollTrigger
@@ -102,7 +108,10 @@ function initializeAnimations() {
   // Hero section animations
   animateHeroSection();
 
-  // Services section animations
+  // Capabilities section animations (new Staggered Monolith)
+  animateCapabilitiesSection();
+
+  // Services section animations (legacy - keeping for compatibility)
   animateServicesSection();
 
   // Projects section - Vertical Staggered List (The Asymmetrical Column)
@@ -193,6 +202,256 @@ function animateHeroSection() {
   gsap.set(".hero__bottom-text", { x: -20, opacity: 0 });
   gsap.set(".circular-arrow", { x: -20, opacity: 0 });
   gsap.set(".hero__portrait", { opacity: 0 });
+}
+
+// ============================================
+// CAPABILITIES SECTION - THE VERTICAL SPINE
+// ============================================
+
+function animateCapabilitiesSection() {
+  const capabilitiesSection = document.querySelector(".capabilities");
+  const capabilitiesGuide = document.querySelector(".capabilities__guide");
+  const capabilitiesTrace = document.getElementById("capabilities-trace");
+  const capabilitiesNumbers = document.querySelectorAll(
+    ".capabilities__number"
+  );
+  const capabilities = document.querySelectorAll(".capability");
+
+  if (!capabilitiesSection || !capabilities.length) return;
+
+  // Position numbers dynamically based on each capability's title position
+  function positionNumbers() {
+    const sectionRect = capabilitiesSection.getBoundingClientRect();
+
+    capabilities.forEach((capability, index) => {
+      const num = capabilitiesNumbers[index];
+      if (!num) return;
+
+      const title = capability.querySelector(".capability__title");
+      if (!title) return;
+
+      const titleRect = title.getBoundingClientRect();
+      const relativeTop = titleRect.top - sectionRect.top;
+
+      num.style.top = `${relativeTop}px`;
+    });
+  }
+
+  // Position on load and resize
+  positionNumbers();
+  window.addEventListener("resize", positionNumbers);
+
+  // Animate guide line visibility
+  ScrollTrigger.create({
+    trigger: capabilitiesSection,
+    start: "top 70%",
+    onEnter: () => {
+      if (capabilitiesGuide) capabilitiesGuide.classList.add("visible");
+      if (capabilitiesTrace) capabilitiesTrace.classList.add("visible");
+      positionNumbers();
+    },
+    onLeaveBack: () => {
+      if (capabilitiesGuide) capabilitiesGuide.classList.remove("visible");
+      if (capabilitiesTrace) capabilitiesTrace.classList.remove("visible");
+    },
+  });
+
+  // Copper trace dot follows scroll along the spine (8vw position)
+  if (capabilitiesTrace) {
+    ScrollTrigger.create({
+      trigger: capabilitiesSection,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const sectionTop = capabilitiesSection.offsetTop;
+        const sectionHeight = capabilitiesSection.offsetHeight;
+        const scrollProgress = self.progress;
+        
+        // Calculate position along the spine (8vw from left)
+        const traceTop = sectionTop + (scrollProgress * sectionHeight);
+        
+        gsap.set(capabilitiesTrace, {
+          top: traceTop,
+          left: "8vw",
+          x: "-50%",
+          y: 0
+        });
+      },
+    });
+  }
+
+  // Layered Parallax - Numbers move at 0.8x speed for cinematic depth
+  capabilitiesNumbers.forEach((num, index) => {
+    gsap.to(num, {
+      y: (i, target) => {
+        const rect = target.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+        return progress * 30; // Subtle parallax at 0.8x equivalent
+      },
+      ease: "none",
+      scrollTrigger: {
+        trigger: capabilitiesSection,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+  });
+
+  // Animate capabilities into view with horizontal slide from spine
+  capabilities.forEach((capability, index) => {
+    // Text-slide entrance animation - slides horizontally from spine
+    ScrollTrigger.create({
+      trigger: capability,
+      start: "top 80%",
+      onEnter: () => {
+        capability.classList.add("in-view");
+        positionNumbers();
+      },
+      onLeaveBack: () => {
+        capability.classList.remove("in-view");
+      },
+    });
+  });
+
+  // Pinned numbers - activate based on which capability is in view
+  capabilities.forEach((capability, index) => {
+    ScrollTrigger.create({
+      trigger: capability,
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => {
+        capabilitiesNumbers.forEach((num, i) => {
+          if (i === index) {
+            num.classList.add("active");
+          } else {
+            num.classList.remove("active");
+          }
+        });
+      },
+      onLeave: () => {
+        capabilitiesNumbers[index].classList.remove("active");
+      },
+      onEnterBack: () => {
+        capabilitiesNumbers.forEach((num, i) => {
+          if (i === index) {
+            num.classList.add("active");
+          } else {
+            num.classList.remove("active");
+          }
+        });
+      },
+      onLeaveBack: () => {
+        capabilitiesNumbers[index].classList.remove("active");
+      },
+    });
+  });
+
+  // Plus icon rotation on hover + horizontal line extension with weighted spring
+  document.querySelectorAll(".capability__plus").forEach((plus) => {
+    plus.addEventListener("mouseenter", () => {
+      // Rotate the plus to X with weighted spring feel
+      gsap.to(plus.querySelector("svg"), {
+        rotation: 45,
+        duration: 0.6,
+        ease: "power3.out",
+      });
+
+      // Extend the horizontal line with weighted feel
+      const plusLine = plus.querySelector(".capability__plus-line");
+      if (plusLine) {
+        gsap.to(plusLine, {
+          width: 200,
+          duration: 0.6,
+          ease: "power3.out",
+        });
+      }
+
+      // Show methodology text with blur-to-clear transition
+      const capability = plus.closest(".capability");
+      if (capability) {
+        gsap.to(capability.querySelector(".capability__methodology"), {
+          maxHeight: "100px",
+          marginTop: "var(--spacing-2xl)",
+          opacity: 1,
+          filter: "blur(0px)",
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
+        });
+      }
+    });
+
+    plus.addEventListener("mouseleave", () => {
+      // Rotate back to plus with weighted spring feel
+      gsap.to(plus.querySelector("svg"), {
+        rotation: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      });
+
+      // Retract the horizontal line with weighted feel
+      const plusLine = plus.querySelector(".capability__plus-line");
+      if (plusLine) {
+        gsap.to(plusLine, {
+          width: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        });
+      }
+
+      // Hide methodology text with blur transition
+      const capability = plus.closest(".capability");
+      if (capability && !capability.classList.contains("active")) {
+        gsap.to(capability.querySelector(".capability__methodology"), {
+          maxHeight: 0,
+          marginTop: 0,
+          opacity: 0,
+          filter: "blur(10px)",
+          y: 10,
+          duration: 0.5,
+          ease: "power3.out",
+        });
+      }
+    });
+  });
+
+  // Click to toggle methodology reveal
+  document.querySelectorAll(".capability").forEach((capability) => {
+    capability.addEventListener("click", (e) => {
+      // Don't toggle if clicking on plus icon (it has its own hover effect)
+      if (e.target.closest(".capability__plus")) return;
+
+      // Close other open capabilities
+      document.querySelectorAll(".capability.active").forEach((activeCap) => {
+        if (activeCap !== capability) {
+          activeCap.classList.remove("active");
+        }
+      });
+
+      // Toggle current capability
+      capability.classList.toggle("active");
+    });
+  });
+
+  // Background color shift between capabilities
+  capabilities.forEach((capability, index) => {
+    const bgColors = ["#111111", "#0f0f0f", "#0d0d0d"];
+
+    ScrollTrigger.create({
+      trigger: capability,
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => {
+        gsap.to(capabilitiesSection, {
+          backgroundColor: bgColors[index] || "#111111",
+          duration: 0.8,
+          ease: "power3.out",
+        });
+      },
+    });
+  });
 }
 
 function animateServicesSection() {
@@ -388,6 +647,15 @@ function initializeNavigation() {
         link.classList.add("active");
       }
     });
+
+    // Handle capabilities section specifically (replaces services)
+    if (current === "capabilities") {
+      navLinks.forEach((link) => {
+        if (link.getAttribute("href") === "#capabilities") {
+          link.classList.add("active");
+        }
+      });
+    }
   });
 }
 

@@ -4,7 +4,7 @@
    ============================================ */
 
 /* Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap");
 @import url("https://api.fontshare.com/v2/css?f[]=satoshi@900,700&display=swap");
 
 :root {
@@ -68,6 +68,26 @@
 
 html {
   scroll-behavior: smooth;
+  /* Allow Lenis to handle scroll on mobile */
+  overscroll-behavior: none;
+  /* Enable touch scrolling for Lenis on mobile */
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Mobile-specific scroll handling */
+@media (max-width: 768px) {
+  html {
+    /* Better touch handling for mobile */
+    touch-action: manipulation;
+  }
+
+  body {
+    /* Prevent scroll bounce and pull-to-refresh */
+    overscroll-behavior: none;
+    overscroll-behavior-y: none;
+    /* Enable hardware-accelerated scrolling */
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 body {
@@ -78,7 +98,6 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 img {
@@ -173,6 +192,25 @@ button {
   height: 40px;
   background-color: var(--color-accent);
   transition: transform var(--transition);
+}
+
+/* Copper Trace Dot - Follows the vertical spine */
+.capabilities__trace {
+  position: absolute;
+  left: 8vw;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  transform: translateX(-50%);
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.capabilities__trace.visible {
+  opacity: 1;
 }
 
 /* Circular Arrow */
@@ -770,6 +808,411 @@ button {
 .color-text {
   color: var(--color-accent);
 }
+
+/* ============================================
+   SECTION 2: CAPABILITIES - THE STAGGERED MONOLITH
+   ============================================ */
+
+.capabilities {
+  position: relative;
+  min-height: 100vh;
+  padding: var(--spacing-section) 0;
+  background-color: var(--color-bg);
+  overflow: hidden;
+  transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 30% Vertical Guide Line - The Spine - Pinned to left like hero */
+.capabilities__guide {
+  position: absolute;
+  left: 8vw;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background-color: var(--color-line);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.capabilities__guide.visible {
+  opacity: 1;
+}
+
+/* Pinned Numbers Column - Behind the spine in 10% opacity */
+.capabilities__numbers {
+  position: absolute;
+  left: 5.8vw;
+  top: 0;
+  transform: translateX(-100%);
+  padding-right: var(--spacing-3xl);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  pointer-events: none;
+}
+
+.capabilities__number {
+  position: absolute;
+  left: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  opacity: 0.1;
+  line-height: 1;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Position each number to align with its capability title */
+.capabilities__number[data-index="0"] {
+  top: calc(var(--spacing-section) + 80px);
+}
+
+.capabilities__number[data-index="1"] {
+  top: calc(var(--spacing-section) + 80px + 60vh);
+}
+
+.capabilities__number[data-index="2"] {
+  top: calc(var(--spacing-section) + 80px + 120vh);
+}
+
+.capabilities__number.active {
+  opacity: 0.15;
+}
+
+.capabilities__number.active::after {
+  content: "";
+  position: absolute;
+  left: calc(100% + 20px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 1px;
+  background-color: var(--color-accent);
+}
+
+/* Container - Aligned to work with 8vw spine */
+.capabilities__container {
+  max-width: 100%;
+  padding: 0 8vw;
+  padding-left: 52vw;
+}
+
+.capabilities__header {
+  margin-bottom: var(--spacing-5xl);
+}
+
+.capabilities__label {
+  font-family: var(--font-nav);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.capabilities__title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-5xl);
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+/* Capabilities List */
+.capabilities__list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual Capability - Clean without borders, vast negative space */
+.capability {
+  position: relative;
+  min-height: 80vh;
+  padding: var(--spacing-5xl) 0;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Horizontal Reveal Line - Grows from the spine */
+.capability__line {
+  position: absolute;
+  top: calc(var(--spacing-4xl) + 20px);
+  left: -38vw;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-text-primary);
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.capability.in-view .capability__line {
+  width: 35vw;
+}
+
+/* Content */
+.capability__content {
+  position: relative;
+}
+
+/* Title with raw + icon - Slides horizontally from spine like "drawn" */
+.capability__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  transform: translateX(-100px);
+  opacity: 0;
+  filter: blur(8px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.capability.in-view .capability__title {
+  transform: translateX(0);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Staggered positioning */
+/* .capability:nth-child(1) .capability__title {
+  margin-left: 0;
+}
+
+.capability:nth-child(2) .capability__title {
+  margin-left: 10vw;
+}
+
+.capability:nth-child(3) .capability__title {
+  margin-left: 5vw;
+} */
+
+/* Raw Floating Plus Icon - Weighted spring rotation on hover */
+.capability__plus {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.capability__plus svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--color-text-primary);
+  stroke-width: 1.5;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.capability__plus:hover svg {
+  transform: rotate(45deg);
+}
+
+/* Extended line on hover - High friction weighted feel */
+.capability__plus-line {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transform: translateY(-50%);
+  transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.capability__plus:hover .capability__plus-line {
+  width: 200px;
+}
+
+/* Tech Stack - Muted Monospace - Positioned ABOVE the title */
+.capability__tech {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  margin-left: 5px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.2s;
+}
+
+.capability.in-view .capability__tech {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.capability__tech span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-secondary);
+}
+
+.capability__tech span:nth-child(even) {
+  opacity: 0.4;
+  font-size: 9px;
+}
+
+/* Methodology Reveal - Gaussian blur-to-clear transition */
+.capability__methodology {
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(10px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.capability:hover .capability__methodology,
+.capability.active .capability__methodology {
+  max-height: 100px;
+  margin-top: var(--spacing-2xl);
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.capability__methodology p {
+  font-family: var(--font-body);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  max-width: 600px;
+  padding-left: 5px;
+  border-left: 1px solid var(--color-accent);
+}
+
+/* Active state for capability */
+.capability.active {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Background shift between capabilities */
+.capability[data-service="interface"] {
+  --capability-bg: #111111;
+}
+
+.capability[data-service="interaction"] {
+  --capability-bg: #0f0f0f;
+}
+
+.capability[data-service="performance"] {
+  --capability-bg: #0d0d0d;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .capabilities__guide {
+    left: 5%;
+  }
+
+  .capabilities__numbers {
+    left: 5%;
+    padding-right: var(--spacing-xl);
+  }
+
+  .capabilities__trace {
+    left: 5%;
+  }
+
+  .capabilities__number[data-index="0"] {
+    top: calc(var(--spacing-section) + 60px);
+  }
+
+  .capabilities__number[data-index="1"] {
+    top: calc(var(--spacing-section) + 60px + 50vh);
+  }
+
+  .capabilities__number[data-index="2"] {
+    top: calc(var(--spacing-section) + 60px + 100vh);
+  }
+
+  .capabilities__container {
+    padding: 0 5vw;
+    padding-left: 25vw;
+  }
+
+  /* Horizontal line adjustment for tablet */
+  .capability__line {
+    left: -20vw;
+  }
+
+  .capability.in-view .capability__line {
+    width: 22vw;
+  }
+
+  .capability__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    flex-wrap: wrap;
+  }
+
+  .capability:nth-child(2) .capability__title,
+  .capability:nth-child(3) .capability__title {
+    margin-left: 5vw;
+  }
+
+  .capability__plus {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .capabilities {
+    min-height: auto;
+    padding: var(--spacing-section) 0;
+  }
+
+  .capabilities__guide {
+    display: none;
+  }
+
+  .capabilities__numbers {
+    display: none;
+  }
+
+  .capabilities__container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .capability {
+    min-height: auto;
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .capability__title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    margin-left: 0 !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .capability__plus {
+    position: absolute;
+    top: var(--spacing-xl);
+    right: 0;
+    width: 35px;
+    height: 35px;
+  }
+
+  .capability__tech {
+    flex-wrap: wrap;
+  }
+
+  .capability__methodology p {
+    font-size: var(--font-size-base);
+  }
+}
+
 /* ============================================
    SECTION 3: PROJECTS - THE MONOLITH SPREAD
    Full-Bleed Editorial with Stacking Scroll
@@ -962,7 +1405,7 @@ button {
 .project-monolith__plus-wrapper {
   position: absolute;
   bottom: 2vh;
-  margin-top: 30PX;
+  margin-top: 30px;
   left: 8vw;
   display: inline-flex;
   align-items: center;
@@ -1061,7 +1504,7 @@ button {
    ============================================ */
 
 @media (max-width: 1024px) {
-  .arch-line{
+  .arch-line {
     display: none;
   }
   .project-monolith {
@@ -1079,7 +1522,7 @@ button {
 
 @media (max-width: 768px) {
   /* Scroll progress indicator hidden on mobile */
-  .arch-line{
+  .arch-line {
     display: none;
   }
   .projects__scroll-progress {

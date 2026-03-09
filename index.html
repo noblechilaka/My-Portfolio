@@ -39,7 +39,7 @@
       <div class="nav__logo">nobl.</div>
       <div class="nav__center">
         <a href="#home" class="nav__link active">home</a>
-        <a href="#services" class="nav__link">services</a>
+        <a href="#capabilities" class="nav__link">capabilities</a>
         <a href="#projects" class="nav__link">work</a>
       </div>
       <div class="nav__right">
@@ -72,7 +72,7 @@
     <div class="mobile-menu" id="mobile-menu">
       <nav class="mobile-menu__nav">
         <a href="#home" class="mobile-menu__link">home</a>
-        <a href="#services" class="mobile-menu__link">services</a>
+        <a href="#capabilities" class="mobile-menu__link">capabilities</a>
         <a href="#projects" class="mobile-menu__link">work</a>
         <a href="#invite" class="mobile-menu__link">contact</a>
       </nav>
@@ -124,130 +124,143 @@
       </div>
     </section>
 
-    <!-- SECTION 2: SERVICES (Vertical Blueprint) -->
-    <section class="services" id="services">
-      <div class="services__spine"></div>
-      <div class="services__container">
-        <div class="services__header">
-          <span class="services__label">Services</span>
-          <h2 class="services__title">What I Do</h2>
+    <!-- SECTION 2: CAPABILITIES (The Vertical Spine) -->
+    <section class="capabilities" id="capabilities">
+      <!-- Vertical Guide Line - 8vw from left - The Spine matching hero -->
+      <div class="capabilities__guide"></div>
+      
+      <!-- Copper Trace Dot - Follows the spine during scroll -->
+      <div class="capabilities__trace" id="capabilities-trace"></div>
+
+      <!-- Pinned Numbers Column -->
+      <div class="capabilities__numbers">
+        <span class="capabilities__number" data-index="0">01</span>
+        <span class="capabilities__number" data-index="1">02</span>
+        <span class="capabilities__number" data-index="2">03</span>
+      </div>
+
+      <div class="capabilities__container">
+        <div class="capabilities__header">
+          <span class="capabilities__label">Capabilities</span>
+          <h2 class="capabilities__title">What I Do</h2>
         </div>
 
-        <div class="services__list">
-          <!-- Service 01: Interface Architecture -->
-          <div class="service-monolith" data-service="interface">
-            <div class="service-monolith__guide"></div>
-            <span class="service-monolith__number">01</span>
-            <div class="service-monolith__content">
-              <h3 class="service-monolith__title">
-                INTERFACE<br />ARCHITECTURE
+        <div class="capabilities__list">
+          <!-- Capability 01: Interface Architecture -->
+          <div class="capability" data-service="interface">
+            <div class="capability__content">
+              <!-- Horizontal reveal line -->
+              <div class="capability__line"></div>
+              <!-- Service Title with raw + icon -->
+              <h3 class="capability__title">
+                INTERFACE ARCHITECTURE
+                <span class="capability__plus">
+                  <span class="capability__plus-line"></span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
               </h3>
-              <div class="service-monolith__plus">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-              </div>
-              <div class="service-monolith__meta">
-                <span class="service-monolith__meta-item">SEMANTIC</span>
-                <span class="service-monolith__meta-item">SCALABLE</span>
-                <span class="service-monolith__meta-item">ACCESSIBLE</span>
+              <!-- Tech stack identifier -->
+              <div class="capability__tech">
+                <span>GSAP</span><span>//</span><span>THREE.JS</span
+                ><span>//</span><span>WEBGL</span>
               </div>
             </div>
-            <div class="service-monolith__reveal">
-              <p class="service-monolith__reveal-text">
-                Building design systems that prioritize clarity,
-                maintainability, and inclusive user experiences across all
-                devices.
+            <!-- Methodology reveal on hover -->
+            <div class="capability__methodology">
+              <p>
+                Building digital interfaces that prioritize clarity,
+                accessibility, and intuitive user experiences across every
+                device and platform.
               </p>
             </div>
           </div>
 
-          <!-- Service 02: Interaction Logic -->
-          <div class="service-monolith" data-service="interaction">
-            <div class="service-monolith__guide"></div>
-            <span class="service-monolith__number">02</span>
-            <div class="service-monolith__content">
-              <h3 class="service-monolith__title">INTERACTION<br />LOGIC</h3>
-              <div class="service-monolith__plus">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-              </div>
-              <div class="service-monolith__meta">
-                <span class="service-monolith__meta-item">GSAP</span>
-                <span class="service-monolith__meta-item">PHYSICS-BASED</span>
-                <span class="service-monolith__meta-item">CINEMATIC</span>
-              </div>
-            </div>
-            <div class="service-monolith__reveal">
-              <p class="service-monolith__reveal-text">
-                Creating fluid, physics-driven animations that feel natural and
-                elevate the overall user experience.
-              </p>
-            </div>
-          </div>
-
-          <!-- Service 03: Performance Engineering -->
-          <div class="service-monolith" data-service="performance">
-            <div class="service-monolith__guide"></div>
-            <span class="service-monolith__number">03</span>
-            <div class="service-monolith__content">
-              <h3 class="service-monolith__title">
-                PERFORMANCE<br />ENGINEERING
+          <!-- Capability 02: Interaction Logic -->
+           
+          <div class="capability" data-service="interaction">
+            <div class="capability__content">
+              <div class="capability__line"></div>
+              <h3 class="capability__title">
+                INTERACTION LOGIC
+                <span class="capability__plus">
+                  <span class="capability__plus-line"></span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
               </h3>
-              <div class="service-monolith__plus">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-              </div>
-              <div class="service-monolith__meta">
-                <span class="service-monolith__meta-item">100 LIGHTHOUSE</span>
-                <span class="service-monolith__meta-item">OPTIMIZED</span>
-                <span class="service-monolith__meta-item">NEXT.JS</span>
+              <div class="capability__tech">
+                <span>GSAP</span><span>//</span><span>PHYSICS</span
+                ><span>//</span><span>CINEMATIC</span>
               </div>
             </div>
-            <div class="service-monolith__reveal">
-              <p class="service-monolith__reveal-text">
-                Optimizing every millisecond—leveraging Next.js, code splitting,
-                and modern caching strategies.
+            <div class="capability__methodology">
+              <p>
+                Crafting fluid, physics-driven animations that feel natural and
+                elevate the overall user experience through purposeful motion.
+              </p>
+            </div>
+          </div>
+
+          <!-- Capability 03: Performance Engineering -->
+          <div class="capability" data-service="performance">
+            <div class="capability__content">
+              <div class="capability__line"></div>
+              <h3 class="capability__title">
+                PERFORMANCE ENGINEERING
+                <span class="capability__plus">
+                  <span class="capability__plus-line"></span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+              </h3>
+              <div class="capability__tech">
+                <span>100 LIGHTHOUSE</span><span>//</span><span>NEXT.JS</span
+                ><span>//</span><span>OPTIMIZED</span>
+              </div>
+            </div>
+            <div class="capability__methodology">
+              <p>
+                Optimizing every millisecond—leveraging modern frameworks, code
+                splitting, and intelligent caching strategies for blazing-fast
+                experiences.
               </p>
             </div>
           </div>
         </div>
-
-        <!-- <div class="services__tagline">
-          <h2 class="services__tagline-text">I BUILD WEBSITES!</h2>
-        </div>
-      </div> -->
+      </div>
     </section>
 
     <!-- SECTION 3: PROJECTS (The Monolith Spread - Full Bleed Editorial) -->
     <section class="projects" id="projects">
-       <div class="services__header" style="margin-left: 120px;">
-          <span class="services__label">Projects</span>
-          <h2 class="services__title">My Selected Works</h2>
-        </div>
+      <div class="services__header" style="margin-left: 120px">
+        <span class="services__label">Projects</span>
+        <h2 class="services__title">My Selected Works</h2>
+      </div>
       <!-- Spine Line Continuation -->
       <div class="projects__spine" id="projects-spine"></div>
-      
+
       <!-- Scroll Progress Indicator -->
       <div class="projects__scroll-progress" id="projects-scroll-progress">
         <div class="projects__scroll-dot" id="projects-scroll-dot"></div>
@@ -255,18 +268,27 @@
 
       <!-- Monoliths Container -->
       <div class="projects__monoliths">
-        
         <!-- Project 1: Slomandaz -->
         <article class="project-monolith" data-project="slomandaz">
           <!-- Left Side - Text (40%) -->
           <div class="project-monolith__text">
-            <span class="project-monolith__label">[ 01 // DEMO E-COMMERCE SITE ]</span>
+            <span class="project-monolith__label"
+              >[ 01 // DEMO E-COMMERCE SITE ]</span
+            >
             <h2 class="project-monolith__title">SLO-MANDAZ</h2>
             <!-- Raw Plus Sign with Tech Stack Reveal - Bottom Left -->
-            <div class="project-monolith__plus-wrapper" data-quick-view-trigger="slomandaz">
+            <div
+              class="project-monolith__plus-wrapper"
+              data-quick-view-trigger="slomandaz"
+            >
               <span class="project-monolith__view-text">view project</span>
               <div class="project-monolith__plus">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
@@ -282,7 +304,11 @@
           <!-- Right Side - MacOS Container (60%) -->
           <div class="project-monolith__preview">
             <div class="project-monolith__window">
-              <img src="assets/images/slomandaz-mockup.png" alt="E-commerce Platform" class="project-monolith__image" />
+              <img
+                src="assets/images/slomandaz-mockup.png"
+                alt="E-commerce Platform"
+                class="project-monolith__image"
+              />
             </div>
           </div>
         </article>
@@ -291,13 +317,23 @@
         <article class="project-monolith" data-project="concave">
           <!-- Left Side - Text (40%) -->
           <div class="project-monolith__text">
-            <span class="project-monolith__label">[ 02 // RESTAURANT WEBSITE ]</span>
+            <span class="project-monolith__label"
+              >[ 02 // RESTAURANT WEBSITE ]</span
+            >
             <h2 class="project-monolith__title">CONCAVE</h2>
             <!-- Raw Plus Sign with Tech Stack Reveal - Bottom Left -->
-            <div class="project-monolith__plus-wrapper" data-quick-view-trigger="concave">
+            <div
+              class="project-monolith__plus-wrapper"
+              data-quick-view-trigger="concave"
+            >
               <span class="project-monolith__view-text">view project</span>
               <div class="project-monolith__plus">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
@@ -313,7 +349,11 @@
           <!-- Right Side - MacOS Container (60%) -->
           <div class="project-monolith__preview">
             <div class="project-monolith__window">
-              <img src="assets/images/concave-mockup.png" alt="Restaurant Website" class="project-monolith__image" />
+              <img
+                src="assets/images/concave-mockup.png"
+                alt="Restaurant Website"
+                class="project-monolith__image"
+              />
             </div>
           </div>
         </article>
@@ -322,13 +362,23 @@
         <article class="project-monolith" data-project="unform">
           <!-- Left Side - Text (40%) -->
           <div class="project-monolith__text">
-            <span class="project-monolith__label">[ 03 // BRUTALISM ARCHITECTURE FIRM ]</span>
+            <span class="project-monolith__label"
+              >[ 03 // BRUTALISM ARCHITECTURE FIRM ]</span
+            >
             <h2 class="project-monolith__title">UNFORM</h2>
             <!-- Raw Plus Sign with Tech Stack Reveal - Bottom Left -->
-            <div class="project-monolith__plus-wrapper" data-quick-view-trigger="unform">
+            <div
+              class="project-monolith__plus-wrapper"
+              data-quick-view-trigger="unform"
+            >
               <span class="project-monolith__view-text">view project</span>
               <div class="project-monolith__plus">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
@@ -344,7 +394,11 @@
           <!-- Right Side - MacOS Container (60%) -->
           <div class="project-monolith__preview">
             <div class="project-monolith__window">
-              <img src="assets/images/Screenshot 2026-03-08 at 13-43-02 PROJECTS UNFORM.png" alt="Creative Portfolio" class="project-monolith__image" />
+              <img
+                src="assets/images/Screenshot 2026-03-08 at 13-43-02 PROJECTS UNFORM.png"
+                alt="Creative Portfolio"
+                class="project-monolith__image"
+              />
             </div>
           </div>
         </article>
@@ -356,10 +410,18 @@
             <span class="project-monolith__label">[ 04 // PERSONAL ]</span>
             <h2 class="project-monolith__title">PORTFOLIO</h2>
             <!-- Raw Plus Sign with Tech Stack Reveal - Bottom Left -->
-            <div class="project-monolith__plus-wrapper" data-quick-view-trigger="portfolio">
+            <div
+              class="project-monolith__plus-wrapper"
+              data-quick-view-trigger="portfolio"
+            >
               <span class="project-monolith__view-text">view project</span>
               <div class="project-monolith__plus">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
@@ -375,11 +437,14 @@
           <!-- Right Side - MacOS Container (60%) -->
           <div class="project-monolith__preview">
             <div class="project-monolith__window">
-              <img src="assets/images/Radiant Smile in Black and White.png" alt="Personal Portfolio" class="project-monolith__image" />
+              <img
+                src="assets/images/Radiant Smile in Black and White.png"
+                alt="Personal Portfolio"
+                class="project-monolith__image"
+              />
             </div>
           </div>
         </article>
-        
       </div>
     </section>
 

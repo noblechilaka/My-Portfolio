@@ -1,84 +1,50 @@
-# Implementation Plan: Section 03 - The Archive (The Monolith Spread)
+# TODO: Vertical Spine Implementation - COMPLETED
 
-## Overview
-Transform the Projects section into a full-bleed editorial layout with stacking scroll effects, parallax depth, and buttery smooth animations.
+## Phase 1: CSS Styles Update ✅
 
----
+- [x] 1.1 Move spine to 8vw position (matching hero)
+- [x] 1.2 Add blur-to-clear transition styles
+- [x] 1.3 Add copper dot styles
+- [x] 1.4 Horizontal line grows from spine
+- [x] 1.5 Remove borders for clean minimal look
+- [x] 1.6 Increase vertical spacing (80vh, 5xl padding)
 
-## Step 1: HTML Structure Updates
-- [x] Restructure `.projects` section for full-height stacking layout
-- [x] Update `.project-monolith` to use 100vh height with 40/60 grid split
-- [x] Ensure metadata (label) is positioned top-left with 1px horizontal line
-- [x] Position raw + sign in bottom-left corner
-- [x] Add scroll progress indicator HTML
+## Phase 2: HTML Updates ✅
 
-## Step 2: CSS Styling - Layout & Component
-- [x] Set `.project-monolith` to 100vh with sticky/pinned behavior
-- [x] Create 40/60 asymmetrical grid (left: text, right: container)
-- [x] Style macOS window container with 1px border (no drop shadow)
-- [x] Position metadata label with horizontal guide line
-- [x] Style raw floating + sign for bottom-left placement
+- [x] 2.1 Add copper trace dot element
+- [x] 2.2 Update spine comment to 8vw
 
-## Step 3: CSS Styling - Enhanced Interactions
-- [x] Implement plus sign hover effect (thickness increase, line extension)
-- [x] Add tech stack reveal animation on plus hover
-- [x] Style scroll progress indicator (vertical line + copper dot)
+## Phase 3: JavaScript Animations ✅
 
-## Step 4: JavaScript - Stacking Scroll Effect
-- [x] Implement ScrollTrigger pinning for stacking effect
-- [x] Create scroll-driven animation where current project stays pinned
-- [x] Next project slides up over current (like sheets of paper)
+- [x] 3.1 Horizontal slide-in from spine (drawn effect)
+- [x] 3.2 Weighted spring for plus rotation
+- [x] 3.3 Copper dot scroll behavior (8vw position)
+- [x] 3.4 Parallax on numbers (0.8x speed)
+- [x] 3.5 Blur-to-clear transition for methodology
 
-## Step 5: JavaScript - Parallax Depth
-- [x] Add parallax to project title (0.9x scroll speed)
-- [x] Add parallax to container (1.1x scroll speed)
-- [x] Create depth illusion (text behind glass)
+## Phase 4: Responsive ✅
 
-## Step 6: JavaScript - Scroll Progress
-- [x] Connect copper dot to scroll progress within projects section
-- [x] Ensure smooth movement along vertical line
-- [x] Sync with stacking scroll effect
-
-## Step 7: Testing & Refinement
-- [ ] Test stacking effect smoothness
-- [ ] Verify parallax depth illusion
-- [ ] Check plus sign interaction
-- [ ] Validate responsive behavior
-- [ ] Ensure Lenis smooth scroll compatibility
+- [x] 4.1 Tablet breakpoint updates
+- [x] 4.2 Mobile breakpoint updates
 
 ---
 
-## Completed Features
+## Implementation Summary - "The Continuous Thread"
 
-### 1. Full-Bleed Layout (100vh per project)
-- Each project occupies full viewport height
-- 40/60 split: Left (40%) for text, Right (60%) for macOS container
+### Layout
+- ✅ Spine at 8vw (matches hero anchor line)
+- ✅ Left third empty (spine + muted serif numbers at 10% opacity)
+- ✅ Numbers positioned behind spine (z-index 5)
+- ✅ Vast negative space between capabilities (80vh each)
 
-### 2. macOS Window Container
-- 1px border (no drop shadow)
-- Floating architectural depth
-- Header with macOS-style dots
+### Components
+- ✅ Service titles: lighter weight (300) for airy feel
+- ✅ Raw floating + icon (no borders)
+- ✅ Tech stack ABOVE title in muted grey
 
-### 3. Metadata Label
-- Top-left positioned with monospaced text
-- 1px horizontal line extending to the right
+### Motion
+- ✅ Horizontal "draw" from spine with blur-to-clear
+- ✅ Weighted spring rotation on plus hover
+- ✅ Copper trace dot follows spine during scroll
+- ✅ Layered parallax on numbers (0.8x speed)
 
-### 4. Raw Plus Sign (Bottom-Left)
-- Grows in thickness on hover (stroke-width: 1.5 → 2.5)
-- Horizontal line extends to reveal tech stack
-- Tech stack items fade in on hover
-
-### 5. Parallax Depth
-- Title moves slower (0.9x) - appears behind
-- Container moves faster (1.1x) - appears in front
-- Creates "text behind glass" illusion
-
-### 6. Scroll Progress Indicator
-- Fixed position on right edge
-- Copper dot moves along vertical line
-- Tracks progress through projects
-
-### 7. Responsive Design
-- Tablet (≤1024px): Adjusted grid proportions
-- Mobile (≤768px): Vertical stack layout
-- Tech stack always visible on mobile
