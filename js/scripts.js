@@ -1,74 +1,9 @@
-// Project data for Quick View
-const projectData = {
-  slomandaz: {
-    title: "Slo-Mandaz Furniture",
-    description:
-      "A premium e-commerce platform for luxury furniture, featuring smooth animations, intuitive navigation, and a seamless shopping experience designed to showcase high-end pieces.",
-    architecture: [
-      "Next.js 14 App Router for optimal performance",
-      "GSAP ScrollTrigger for cinematic animations",
-      "Tailwind CSS for responsive styling",
-      "Framer Motion for micro-interactions",
-      "Optimized image loading with next/image",
-    ],
-    tech: ["HTML", "CSS", "JAVASCRIPT"],
-    image: "assets/images/slomandaz-mockup.png",
-    link: "https://slomandazfurniture.vercel.app/",
-  },
-  concave: {
-    title: "Concave Restaurant",
-    description:
-      "An elegant restaurant portfolio website with immersive visual storytelling, showcasing the culinary experience through beautiful imagery and smooth transitions.",
-    architecture: [
-      "Next.js 14 with static site generation",
-      "Custom GLSL shaders for visual effects",
-      "GSAP for timeline-based animations",
-      "Responsive grid layout system",
-      "Accessibility-first design approach",
-    ],
-    tech: ["HTML", "GSAP", "JAVASCRIPT", "CSS3"],
-    image: "assets/images/concave-mockup.png",
-    link: "https://concaveats.vercel.app/",
-  },
-  unform: {
-    title: "Brutalist Architecture Firm",
-    description:
-      "A bold creative portfolio pushing the boundaries of web design with experimental layouts, 3D elements, and interactive experiences.",
-    architecture: [
-      "React with Three.js for 3D rendering",
-      "Custom WebGL shaders",
-      "GSAP ScrollTrigger for scroll-driven animations",
-      "Performance-optimized asset loading",
-      "Interactive canvas-based backgrounds",
-    ],
-    tech: ["HTML", "THREE.JS", "GSAP", "CSS", "VANILLA JS"],
-    image:
-      "assets/images/Screenshot 2026-03-08 at 13-43-02 PROJECTS UNFORM.png",
-    link: "",
-  },
-  portfolio: {
-    title: "Personal Portfolio",
-    description:
-      "This portfolio website itself - a testament to front-end mastery with horizontal scrolling, parallax effects, and buttery smooth interactions.",
-    architecture: [
-      "Next.js 14 with App Router",
-      "GSAP ScrollTrigger for horizontal scroll",
-      "Lenis for smooth scroll experience",
-      "Custom cursor with lens reveal effect",
-      "Modular component architecture",
-    ],
-    tech: ["NEXT.JS", "GSAP", "LENIS", "JAVASCRIPT"],
-    image: "assets/images/Radiant Smile in Black and White.png",
-    link: "#",
-  },
-};
-
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Initialize Lenis smooth scroll
 // Check if device supports touch for mobile optimizations
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
 const lenis = new Lenis({
   duration: isTouchDevice ? 0.8 : 1.2, // Faster on mobile for better responsiveness
@@ -266,15 +201,15 @@ function animateCapabilitiesSection() {
         const sectionTop = capabilitiesSection.offsetTop;
         const sectionHeight = capabilitiesSection.offsetHeight;
         const scrollProgress = self.progress;
-        
+
         // Calculate position along the spine (8vw from left)
-        const traceTop = sectionTop + (scrollProgress * sectionHeight);
-        
+        const traceTop = sectionTop + scrollProgress * sectionHeight;
+
         gsap.set(capabilitiesTrace, {
           top: traceTop,
           left: "8vw",
           x: "-50%",
-          y: 0
+          y: 0,
         });
       },
     });
@@ -286,7 +221,8 @@ function animateCapabilitiesSection() {
       y: (i, target) => {
         const rect = target.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+        const progress =
+          (viewportHeight - rect.top) / (viewportHeight + rect.height);
         return progress * 30; // Subtle parallax at 0.8x equivalent
       },
       ease: "none",
@@ -998,7 +934,58 @@ function initializeMaskedTextReveals() {
 // Full-Bleed Editorial with Subtle Parallax
 // ============================================
 
+// Function to dynamically render projects from projectsData
+function renderProjects() {
+  const container = document.getElementById("projects-container");
+  if (!container || !projectsData || projectsData.length === 0) return;
+
+  container.innerHTML = projectsData
+    .map(
+      (project, index) => `
+    <article class="project-monolith" data-project="${project.id}">
+      <div class="project-monolith__text">
+        <span class="project-monolith__label">[ ${String(index + 1).padStart(
+          2,
+          "0"
+        )} // ${project.label} ]</span>
+        <h2 class="project-monolith__title">${project.title}</h2>
+        <div class="project-monolith__plus-wrapper" data-quick-view-trigger="${
+          project.id
+        }">
+          <span class="project-monolith__view-text">view project</span>
+          <div class="project-monolith__plus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <div class="project-monolith__tech-line"></div>
+          <div class="project-monolith__tech-stack">
+            ${project.tech
+              .map(
+                (t) => `<span class="project-monolith__tech-item">${t}</span>`
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>
+      <div class="project-monolith__preview">
+        <div class="project-monolith__window">
+          <img src="${project.image}" alt="${
+        project.title
+      }" class="project-monolith__image" />
+        </div>
+      </div>
+    </article>
+  `
+    )
+    .join("");
+}
+
 function initializeProjectsSection() {
+  // First render projects from data
+  renderProjects();
+
   // Initialize simple parallax (title and image with different speeds)
   initializeSimpleParallax();
 
@@ -1178,94 +1165,9 @@ function initializeCursorLens() {
 
 // ============================================
 // QUICK VIEW MODAL
+// Note: Quick view functionality has been moved to js/quickView.js
+// This section is kept for reference only
 // ============================================
 
-function initializeQuickView() {
-  const quickView = document.getElementById("quick-view");
-  const quickViewClose = document.getElementById("quick-view-close");
-  const triggers = document.querySelectorAll("[data-quick-view-trigger]");
-
-  if (!quickView) return;
-
-  // Open quick view
-  triggers.forEach((trigger) => {
-    trigger.addEventListener("click", (e) => {
-      e.preventDefault();
-      const projectId = trigger.dataset.quickViewTrigger;
-      const data = projectData[projectId];
-
-      if (data) {
-        openQuickView(data);
-      }
-    });
-  });
-
-  // Close quick view
-  if (quickViewClose) {
-    quickViewClose.addEventListener("click", closeQuickView);
-  }
-
-  // Close on backdrop click
-  quickView.addEventListener("click", (e) => {
-    if (e.target === quickView) {
-      closeQuickView();
-    }
-  });
-
-  // Close on escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && quickView.classList.contains("active")) {
-      closeQuickView();
-    }
-  });
-
-  function openQuickView(data) {
-    const image = document.getElementById("quick-view-image");
-    const number = document.getElementById("quick-view-number");
-    const title = document.getElementById("quick-view-title");
-    const description = document.getElementById("quick-view-description");
-    const architecture = document.getElementById("quick-view-architecture");
-    const tech = document.getElementById("quick-view-tech");
-
-    if (image) image.src = data.image;
-    if (number) {
-      const index =
-        Object.keys(projectData).indexOf(
-          Object.keys(projectData).find((key) => projectData[key] === data)
-        ) + 1;
-      number.textContent = String(index).padStart(2, "0") + ".";
-    }
-    if (title) title.textContent = data.title;
-    if (description) description.textContent = data.description;
-
-    // Populate architecture
-    if (architecture) {
-      architecture.innerHTML = data.architecture
-        .map(
-          (item) => `<span class="quick-view__architecture-item">${item}</span>`
-        )
-        .join("");
-    }
-
-    // Populate tech
-    if (tech) {
-      tech.innerHTML = data.tech
-        .map((t) => `<span class="quick-view__tech-item">${t}</span>`)
-        .join("");
-    }
-
-    quickView.classList.add("active");
-    document.body.style.overflow = "hidden";
-
-    // Disable lenis when modal is open
-    if (lenis) lenis.stop();
-  }
-
-  function closeQuickView() {
-    quickView.classList.remove("active");
-    document.body.style.overflow = "";
-
-    // Re-enable lenis
-    if (lenis) lenis.start();
-  }
-}
+// The initializeQuickView function is now in js/quickView.js
+// It uses projectsData from js/projectsData.js

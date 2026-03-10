@@ -1324,10 +1324,14 @@ button {
 /* Project Title - Massive Centerpiece */
 .project-monolith__title {
   font-family: var(--font-heading);
-  font-size: clamp(4rem, 10vw, 10rem);
+  /* font-size: clamp(4rem, 10vw, 10rem);
   font-weight: 700;
   line-height: 0.9;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.03em; */
+   font-size: var(--font-size-hero);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--color-text-primary);
   cursor: default;
   /* Will be animated with parallax */
