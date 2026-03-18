@@ -3,10 +3,10 @@ const projectsData = [
   {
     id: "slomandaz",
     label: "DEMO E-COMMERCE SITE",
-    title: "SLO-MANDAZ",
+    title: "SLOMANDAZ",
     description:
       "A premium e-commerce platform for luxury furniture, featuring smooth animations, intuitive navigation, and a seamless shopping experience designed to showcase high-end pieces.",
-    tech: ["NEXT.JS", "GSAP", "TAILWIND"],
+    tech: ["HTML", "CSS", "JS"],
     architecture: [
       "Next.js 14 App Router for optimal performance",
       "GSAP ScrollTrigger for cinematic animations",
@@ -23,7 +23,7 @@ const projectsData = [
     title: "CONCAVE",
     description:
       "An elegant restaurant portfolio website with immersive visual storytelling, showcasing the culinary experience through beautiful imagery and smooth transitions.",
-    tech: ["NEXT.JS", "GSAP", "GLSL"],
+    tech: ["HTML","CSS", "JAVASCRIPT", "GSAP"],
     architecture: [
       "Next.js 14 with static site generation",
       "Custom GLSL shaders for visual effects",
@@ -40,7 +40,7 @@ const projectsData = [
     title: "UNFORM",
     description:
       "A bold creative portfolio pushing the boundaries of web design with experimental layouts, 3D elements, and interactive experiences.",
-    tech: ["REACT", "THREE.JS", "GSAP"],
+    tech: ["HTML", "CSSS", "VANILLA-JS", "THREE.JS", "GSAP"],
     architecture: [
       "React with Three.js for 3D rendering",
       "Custom WebGL shaders",
@@ -58,7 +58,7 @@ const projectsData = [
     title: "PORTFOLIO",
     description:
       "This portfolio website itself - a testament to front-end mastery with horizontal scrolling, parallax effects, and buttery smooth interactions.",
-    tech: ["NEXT.JS", "GSAP", "LENIS"],
+    tech: ["HTML", "CSS", "JS", "LENIS", "GSAP"],
     architecture: [
       "Next.js 14 with App Router",
       "GSAP ScrollTrigger for horizontal scroll",
@@ -67,6 +67,22 @@ const projectsData = [
       "Modular component architecture",
     ],
     image: "assets/images/Radiant Smile in Black and White.png",
+    link: "#",
+  },
+  {
+    id: "hotel",
+    label: "booking-demo",
+    title: "EMILY HOTELS",
+    description:
+      "This Hotel website itself - a testament to front-end mastery and storytelling with horizontal scrolling, scroll based effects and animations, and buttery smooth interactions.",
+    tech: ["HTML", "CSS", "JAVASCRIPT", "SUPABASE", "GSAP", "LENIS"],
+    architecture: [
+      "Vanilla JS with Supabase",
+      "GSAP ScrollTrigger for scroll based animations",
+      "Lenis for smooth scroll experience",
+      "Modular component architecture",
+    ],
+    image: "assets/images/emily-hero section.png",
     link: "#",
   },
 ];

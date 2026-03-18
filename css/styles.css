@@ -1427,7 +1427,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   transition: color 0.3s ease;
-  margin-left: 20px;
+  margin-left: 10px;
   min-width: 100px;
 }
 
@@ -1541,6 +1541,10 @@ button {
     padding: var(--spacing-4xl) 0;
   }
 
+  .services__header{
+    padding-left: 0px;
+   transform: translateX(-94px);
+  }
   /* Switch to vertical stack on mobile */
   .project-monolith__text {
     order: 2;
@@ -2115,22 +2119,59 @@ button {
     left: var(--spacing-lg);
   }
 
-  /* Quick View Modal Responsive */
+/* Quick View Modal Responsive */
   .quick-view__content {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
     gap: var(--spacing-xl);
+    height: 85vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-lg);
+    padding-top: var(--spacing-4xl);
   }
 
   .quick-view__image-wrap {
-    height: 40vh;
+    height: 30vh;
+    flex-shrink: 0;
+  }
+
+  .quick-view__info {
+    padding: var(--spacing-lg) 0;
+    overflow: visible;
+  }
+
+  .quick-view__number {
+    font-size: var(--font-size-sm);
+  }
+
+  .quick-view__title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  .quick-view__description {
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+  }
+
+  .quick-view__architecture-title {
+    font-size: 10px;
+  }
+
+  .quick-view__architecture-item {
+    font-size: 12px;
+  }
+
+  .quick-view__tech-item {
+    font-size: 10px;
+    padding: 6px 10px;
   }
 
   .quick-view__close {
-    top: var(--spacing-lg);
-    right: var(--spacing-lg);
-    width: 40px;
-    height: 40px;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 36px;
+    height: 36px;
   }
 
   /* Cursor lens - disable on mobile */

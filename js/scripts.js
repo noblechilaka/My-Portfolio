@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeMaskedTextReveals();
   initializeProjectsSection();
   initializeCursorLens();
-  initializeQuickView();
 });
 
 function initializeAnimations() {
@@ -952,7 +951,7 @@ function renderProjects() {
         <div class="project-monolith__plus-wrapper" data-quick-view-trigger="${
           project.id
         }">
-          <span class="project-monolith__view-text">view project</span>
+<span class="project-monolith__view-text">visit site</span>
           <div class="project-monolith__plus">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <line x1="12" y1="5" x2="12" y2="19"></line>
