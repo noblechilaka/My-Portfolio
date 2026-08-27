@@ -40,7 +40,7 @@ const projectsData = [
     title: "UNFORM",
     description:
       "A bold creative portfolio pushing the boundaries of web design with experimental layouts, 3D elements, and interactive experiences.",
-    tech: ["HTML", "CSSS", "VANILLA-JS", "THREE.JS", "GSAP"],
+    tech: ["HTML", "CSS", "VANILLA-JS", "THREE.JS", "GSAP"],
     architecture: [
       "React with Three.js for 3D rendering",
       "Custom WebGL shaders",
